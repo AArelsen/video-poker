@@ -1,0 +1,121 @@
+.playing-card{
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto 1fr auto;
+    width: clamp(4.5rem, 15vw, 8rem);
+    aspect-ratio: 5 / 7;
+    padding: 0.5rem;
+    overflow: hidden;
+    background: #ffffff;
+    border: 2px solid #d1d5db;
+    border-radius: 0.75rem;
+    box-shadow: 0 0.25rem 0.5rem rgb(0 0 0 / 20%);
+    font-family:  Georgia, serif;
+    opacity: 1;
+}
+
+.playing-card:not(:disabled){
+    cursor: pointer;
+}
+
+.playing-card:focus-visible{
+    outline: 4px solid #f59e0b;
+    outline-offset: 3px;
+}
+
+.playing-card--red{
+    color: #dc2626;
+}
+
+.playing-card--black{
+    color: #111827;
+}
+
+.playing-card--held{
+    border-color: #f59e0b;
+    transform: translate(-0.5rem);
+}
+
+.playing-card__corner{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: clamp(0.75rem, 2vw, 1.1rem);
+    font-weight: 700;
+    line-height: 1;
+}
+
+.playing-card__corner--top{
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+}
+
+.playing-card__corner--bottom{
+    grid-column: 3;
+    grid-row: 3;
+    justify-self: end;
+    transform: rotate(180deg);
+}
+
+.playing-card__symbol{
+    grid-column: 1/ -1;
+    grid-row: 2;
+    place-self: center;
+    font-size: clamp(2rem, 6vw, 4rem);
+}
+
+.playing-card__held{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    padding: 0.25rem, 0.5rem;
+    color: #fbbf24;
+    border-radius: 0.25 rem;
+    font-family: Arial, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    transform: translate(-50%, -50%);
+}
+
+.playing-card--black{
+    padding: 0.4rem;
+    background: #ffffff;
+}
+
+.playing-card__black-pattern{
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+    width: 100%;
+    height: 100%;
+    border: 3px solid #ffffff;
+    border-radius: 0.5rem;
+    background: 
+        repeating-linear-gradient(
+            45deg,
+            #312e81 0,
+            #312e81 8px,
+            #7c3aed 8px,
+            #7c3aed 16px
+        );
+}
+
+.card-hand{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: clamp(0.5rem, 2vw, 1.5rem);
+    margin-block: 2rem;
+}
+
+
+
+
+
+
+
+
+
+
+
