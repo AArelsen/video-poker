@@ -52,6 +52,11 @@ export function Card({
     const isRed = 
         card.suit === "hearts" ||
         card.suit === "diamonds";
+
+    const accessibleName = isFaceDown
+        ? 'Face-down playing card'
+        : `${valueNames[card.value]} of ${suitNames[card.suit]}`;
+
     const classNames = [
         "palying-card",
         isRed
@@ -62,10 +67,6 @@ export function Card({
     ]
         .filter(Boolean)
         .join(" ");
-
-        const accessibleName = isFaceDown
-            ?  "Face-down palying card"
-            : "${valueNames[card.value]} of ${suitNames[card.suit]}";
         return (
             <button 
             type="button"
