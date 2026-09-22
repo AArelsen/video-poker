@@ -34,7 +34,7 @@ const values: CardValue[] = [
 export function createDeck(): PlayingCard[]{
     return suits.flatMap((suit) =>
     values.map((value) => ({
-        id: "${suit} - ${value}",
+        id:`${suit} - ${value}`,
         suit,
         value,
     })),
