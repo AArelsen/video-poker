@@ -4,6 +4,7 @@ import { CurrentBet } from '../CurrentBet/CurrentBet';
 import { TotalCoins } from '../TotalCoins/TotalCoins';
 import { useGameStore } from '../../store/gameStore';
 import "./Game.css";
+import { CurrentHand } from "../CurrentHand/CurrentHand";
 
 
 export function Game() {
@@ -46,6 +47,8 @@ export function Game() {
             (player) => player.id === currentPlayerId,
         );
 
+        const lastWin = useGameStore((state) =>state.lastWin);
+
         if(!currentPlayer){
             return (
                 <section>
@@ -70,7 +73,7 @@ export function Game() {
                     <CurrentBet />
 
                 </header>
-
+                <CurrentHand/>
                 {hand.length > 0 && (
                     <div 
                     className="card-hand"
@@ -118,8 +121,11 @@ export function Game() {
 
                 {gamePhase === "finished" && (
                     <p
-                    role="alert">
-                        The player does not have enough coins.
+                    aria-live="polite">
+                        {lastWin >0
+                            ? `You won ${lastWin} coins.`
+                            : 'No payout this round.'
+                            }
                     </p>
                 )}
             </section>
