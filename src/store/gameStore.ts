@@ -4,6 +4,9 @@ import type { Player } from "../types/Player";
 import type  { PlayingCard } from "../types/PlayingCard";
 import { createDeck } from "../utils/createDeck";
 import { shuffleDeck } from "../utils/shuffleDeck";
+import type { PokerHand } from "../types/PokerHand";
+import { evaluateHand } from "../utils/evaluateHand";
+import { payoutMultipliers } from "../data/payouts";
 
 export type GamePhase = "idle" |  "dealt" | "finished";
 
@@ -22,6 +25,8 @@ interface GameStore {
     startRound: () => boolean;
     toggleHold: (cardId: string) => void;
     drawCards: () => void;
+    currentPokerHand: PokerHand | null;
+    lastWin: number;
 }
 
 export const useGameStore = create<GameStore>()(
@@ -35,6 +40,8 @@ export const useGameStore = create<GameStore>()(
         heldCardIds: [],
         currentBet: 1,
         gamePhase: "idle",
+        currentPokerHand: null,
+        lastWin: 0,
 
         addPlayer: (name) => {
             const trimmedName = name.trim();
@@ -131,6 +138,8 @@ export const useGameStore = create<GameStore>()(
                 hand,
                 discardedCards: [],
                 heldCardIds: [],
+                currentPokerHand: evaluateHand(hand),
+                lastWin: 0,
                 gamePhase: "dealt",
             }));
             return true;
@@ -187,7 +196,20 @@ export const useGameStore = create<GameStore>()(
                 return replacementCard;
             });
 
+            const pokerHand = evaluateHand(updateHand);
+
+            const winnings=
+                state.currentBet * payoutMultipliers[pokerHand];
+
             set({
+                players: state.players.map((player) =>
+                    player.id === state.currentPlayerId
+                        ? {
+                            ...player,
+                            coins: player.coins + winnings,
+                        }
+                        : player,
+                    ),
                 deck: state.deck.slice(cardsToDiscard.length),
                 hand: updateHand,
                 discardedCards: [
@@ -195,7 +217,9 @@ export const useGameStore = create<GameStore>()(
                     ...cardsToDiscard,
                 ],
                 heldCardIds: [],
-                gamePhase: "finished",
+                currentPokerHand: pokerHand,
+                lastWin: winnings,
+                gamePhase:  'finished',
             });
         },
     }),
