@@ -34,7 +34,8 @@
 
 .playing-card--held{
     border-color: #f59e0b;
-    transform: translate(-0.5rem);
+    transform: translateY(-0.5rem);
+    box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 35%);
 }
 
 .playing-card__corner{
@@ -70,21 +71,21 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    padding: 0.25rem, 0.5rem;
+    padding: 0.25rem 0.5rem;
     color: #fbbf24;
-    border-radius: 0.25 rem;
+    border-radius: 0.25rem;
     font-family: Arial, sans-serif;
     font-size: 0.75rem;
     font-weight: 700;
     transform: translate(-50%, -50%);
 }
 
-.playing-card--black{
+.playing-card--back{
     padding: 0.4rem;
-    background: #ffffff;
+    background: #312e81;
 }
 
-.playing-card__black-pattern{
+.playing-card__back-pattern{
     grid-column: 1 / -1;
     grid-row: 1 / -1;
     width: 100%;
