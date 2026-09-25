@@ -31,13 +31,13 @@ export function CurrentBet() {
             <div>
                 <button type= "button"
                 onClick={() =>
-                    setCurrentBet || currentBet <= 1       
-                }
+                    setCurrentBet (currentBet - 1)}
                 disabled = {
                     cannotChangeBet || currentBet <= 1
                 }
                 aria-label="Decrease bet"
                 >
+                    -
                 </button>
 
                 <button

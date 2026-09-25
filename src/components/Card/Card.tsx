@@ -21,7 +21,7 @@ const suitSymbols: Record<CardSuit, string> = {
 
 const suitNames: Record<CardSuit, string> = {
     clubs: "clubs",
-    diamonds: "diamands",
+    diamonds: "diamonds",
     hearts: "hearts",
     spades: "spades",
 };
@@ -40,7 +40,7 @@ const valueNames: Record<CardValue, string> = {
     Q: "Queen",
     K: "King",
     A: "Ace",
-}
+};
 
 export function Card({
     card,
@@ -58,12 +58,12 @@ export function Card({
         : `${valueNames[card.value]} of ${suitNames[card.suit]}`;
 
     const classNames = [
-        "palying-card",
+        "playing-card",
         isRed
         ? "playing-card--red"
         : "playing-card--black",
-        isFaceDown ? "palying-card--back" : "",
-        isHeld ? "palying-card--held" : "",
+        isFaceDown ? "playing-card--back" : "",
+        isHeld ? "playing-card--held" : "",
     ]
         .filter(Boolean)
         .join(" ");
@@ -78,13 +78,13 @@ export function Card({
             >
                 {isFaceDown ? (
                     <span
-                        className="playin-card__back-pattern"
-                        aria-hiden="true"
+                        className="playing-card__back-pattern"
+                        aria-hidden="true"
                     />
                 ) : (
                     <>
                         <span
-                        className="playing-card__corner palying-card__corner--top"
+                        className="playing-card__corner playing-card__corner--top"
                         aria-hidden="true"
                         >
                             <span>{card.value}</span>
@@ -107,7 +107,7 @@ export function Card({
                         </span>
 
                         {isHeld && (
-                            <span className="palying-card__held">
+                            <span className="playing-card__held">
                                 Held
                             </span>
                         )}

@@ -26,7 +26,7 @@
 }
 
 .game-board__status button{
-    margin : 0.5rem o.25rem 0;
+    margin : 0.5rem 0.25rem 0;
 }
 
 .game-board button:disabled{

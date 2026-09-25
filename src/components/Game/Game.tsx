@@ -35,7 +35,7 @@ export function Game() {
             (state) => state.startRound,
         );
 
-        const toogleHold = useGameStore(
+        const toggleHold = useGameStore(
             (state) => state.toggleHold,
         );
 
@@ -64,7 +64,10 @@ export function Game() {
             currentPlayer.coins < currentBet;
 
         return (
-            <section className="game-board">
+            <section 
+            className="game-board"
+            aria-label="Video Poker game"
+            >
                 <header className="game-board__status">
                     <div>
                         player: <strong> {currentPlayer.name}</strong>
@@ -77,6 +80,7 @@ export function Game() {
                 {hand.length > 0 && (
                     <div 
                     className="card-hand"
+                    role="group"
                     aria-label="Current Poker Hand"
                     >
                     {hand.map((card) => (
@@ -86,7 +90,7 @@ export function Game() {
                             isHeld={heldCardIds.includes(card.id)}
                             onClick= {
                                 gamePhase === "dealt" 
-                                ? () => toogleHold(card.id)
+                                ? () => toggleHold(card.id)
                                 : undefined
                             } 
                         />
