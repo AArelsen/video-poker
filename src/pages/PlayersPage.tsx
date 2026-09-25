@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { useGameStore } from "../store/gameStore";
+import "./PlayersPage.css";
 
 export function PlayersPage(){
     const [name, setName] = useState("");
@@ -51,12 +52,14 @@ export function PlayersPage(){
             {players.length=== 0 ? (
                 <p>No players have been created.</p>
             ) : (
-                <ul>
+                <ul className="player-list">
                     {players.map((player) => {
                         const isCurrentPlayer = 
                             player.id === currentPlayerId;
                         return (
-                            <li key={player.id}>
+                            <li key={player.id}
+                                className="player-list__item"
+                            >
                                 <span>
                                     {player.name} - {player.coins} coins
                                 </span>

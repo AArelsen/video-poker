@@ -1,0 +1,34 @@
+.player-list{
+    width: min(100%, 32rem);
+    padding: 0;
+    list-style: none;
+}
+
+.player-list__item{
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 2rem;
+    padding-block: 0.75rem;
+    border-bottom: 1px solid #d1d5db;
+}
+
+.player-list__item button{
+    min-height: 2.75rem;
+    padding: 0.5rem 1rem;
+    border: 0;
+    border-radius: 0.5rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.player-list__item buttom:disabled{
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+@media (max-width: 30rem){
+    .player-list__item {
+        gap: 1rem;
+    }
+}
