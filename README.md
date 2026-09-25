@@ -1,75 +1,93 @@
-# React + TypeScript + Vite
+# Video Poker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Et Video Poker-spill utviklet som en individuell skoleoppgave. Prosjektet viser bruk av React, React Router, Zustand og TypeScript.
 
-Currently, two official plugins are available:
+## Funksjonalitet
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Opprette og velge spillere
+- Hver ny spiller starter med 100 mynter
+- Velge innsats mellom 1 og 5 mynter
+- Dele ut fem kort fra en stokket kortstokk
+- Holde kort som ikke skal byttes
+- Bytte kortene som ikke er holdt
+- Evaluere den ferdige pokerhånden
+- Beregne gevinst ut fra innsats og pokerhånd
+- Beholde spilldata ved navigering og oppdatering av nettleseren
+- Vise regler og utbetalinger på en egen side
 
-## React Compiler
+## Teknologier
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React
+- React Router
+- Zustand
+- TypeScript
+- Vite
+- CSS
 
-## Expanding the ESLint configuration
+## Installasjon
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Klon repositoryet og installer avhengighetene:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+git clone https://github.com/AArelsen/video-poker.git
+cd video-poker
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+Start utviklingsserveren:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm run dev
 ```
+
+Lag en produksjonsbuild:
+
+```bash
+npm run build
+```
+
+## Slik spiller du
+
+1. Opprett eller velg en spiller.
+2. Velg innsats mellom 1 og 5 mynter.
+3. Trykk på **Deal Cards** for å få fem kort.
+4. Trykk på kortene du ønsker å beholde. Disse markeres med **Held**.
+5. Trykk på **Draw cards** for å bytte kortene som ikke er holdt.
+6. Den ferdige pokerhånden evalueres, og eventuell gevinst legges til spillerens mynter.
+
+## Pokerhender og utbetalinger
+
+Utbetalingen beregnes ved å multiplisere innsatsen med håndens multiplikator.
+
+| Pokerhånd | Multiplikator |
+|---|---:|
+| Royal Flush | 250 |
+| Straight Flush | 50 |
+| Four of a Kind | 25 |
+| Full House | 9 |
+| Flush | 6 |
+| Straight | 4 |
+| Three of a Kind | 3 |
+| Two Pair | 2 |
+| One Pair | 1 |
+| High Card | Ingen utbetaling |
+
+## Tilstand og lagring
+
+Spilltilstanden håndteres i en Zustand-store. Store-en inneholder blant annet spillere, kortstokk, spillerens hånd, kastede kort, innsats, spillfase og gevinst.
+
+Tilstanden persisteres i `localStorage`. En aktiv runde fortsetter derfor dersom spilleren navigerer til en annen side eller oppdaterer nettleseren.
+
+## Kortkomponenten
+
+Forsiden og baksiden av kortet håndteres i samme `Card`-komponent ved hjelp av egenskapen `isFaceDown`.
+
+Denne løsningen ble valgt fordi begge variantene representerer det samme spillekortet og deler størrelse, struktur og oppførsel. Det reduserer duplisering og gjør komponenten enklere å vedlikeholde.
+
+Kortet er laget med CSS Grid. Symboler, farger og kortets bakside er laget med CSS og tekstsymboler.
+
+## Tilgjengelighet og responsivt design
+
+Applikasjonen kan brukes med mus, berøring og tastatur. Interaktive elementer har tilgjengelige navn og synlig fokusmarkering.
+
+Layouten tilpasser seg forskjellige skjermstørrelser, og kortene brytes over flere linjer på mindre skjermer.
